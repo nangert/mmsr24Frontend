@@ -8,11 +8,11 @@ import {QueryMetrics} from "../models/retrieveModel";
   providedIn: 'root'
 })
 export class RecommenderApiService {
-  private baseUrl = 'https://mmsr24frontend-2nz6q1c6p-nangerts-projects.vercel.app/';
+  private baseUrl = 'https://841f-62-68-222-39.ngrok-free.app';
   private http = inject(HttpClient)
 
   checkHealth(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/health`);
+    return this.http.get(`${this.baseUrl}/health`).pipe();
   }
 
   retrieveSongs(): Observable<Song[]> {
