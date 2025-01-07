@@ -8,7 +8,7 @@ import {QueryMetrics} from "../models/retrieveModel";
   providedIn: 'root'
 })
 export class RecommenderApiService {
-  private baseUrl = 'http://127.0.0.1:5000';
+  private baseUrl = 'https://mmsr24frontend-2nz6q1c6p-nangerts-projects.vercel.app/';
   private http = inject(HttpClient)
 
   checkHealth(): Observable<any> {
@@ -16,6 +16,7 @@ export class RecommenderApiService {
   }
 
   retrieveSongs(): Observable<Song[]> {
+    console.log(this.baseUrl)
     return this.http.get<Song[]>(`${this.baseUrl}/songs`);
   }
 
