@@ -185,7 +185,7 @@ export class RecommenderService {
 
       this.isLoadingRecommendations.set(true)
 
-      return this.apiService.getLamdaMARTRecommendations(model.songId, model.count).pipe(
+      return this.apiService.getLambdaMARTRecommendations(model.songId, model.count).pipe(
         tap((res) => {
           this.querySong.set(res.query_song)
           this.isLoadingRecommendations.set(false)
@@ -193,7 +193,7 @@ export class RecommenderService {
       )
     })
   )
-  lamdaMARTRecommendations: Signal<RetrieveResult | undefined> = toSignal(this.lamdaMARTRecommendations$)
+  lambdaMARTRecommendations: Signal<RetrieveResult | undefined> = toSignal(this.lamdaMARTRecommendations$)
 
   resetRecommendations(): void {
     this.querySong.set(undefined)

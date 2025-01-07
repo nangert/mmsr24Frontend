@@ -122,5 +122,5 @@ export class MetricsService {
       return this.apiService.getQueryMetrics(body)
     })
   )
-  lamdaMARTMetrics = toSignal(this.lamdaMARTMetrics$)
+  lambdaMARTMetrics = toSignal(this.lamdaMARTMetrics$)
 }

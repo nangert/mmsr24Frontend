@@ -86,11 +86,11 @@
       retrievalSystem="VGG19 Model"
     />
   }
-  @if (recommenderService.lamdaMARTRecommendations()) {
+  @if (recommenderService.lambdaMARTRecommendations()) {
     <app-retrieval-result-model
-      [retrievalResult]="recommenderService.lamdaMARTRecommendations()!"
-      [queryResult]="metricService.lamdaMARTMetrics"
-      retrievalSystem="LamdaMART Model"
+      [retrievalResult]="recommenderService.lambdaMARTRecommendations()!"
+      [queryResult]="metricService.lambdaMARTMetrics"
+      retrievalSystem="LambdaMART Model"
     />
   }
 

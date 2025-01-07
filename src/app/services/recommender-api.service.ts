@@ -96,7 +96,7 @@ export class RecommenderApiService {
     });
   }
 
-  getLamdaMARTRecommendations(querySongId: string, N: number): Observable<RetrieveResult> {
+  getLambdaMARTRecommendations(querySongId: string, N: number): Observable<RetrieveResult> {
     const url = `${this.baseUrl}/retrieve/lambda`;
     return this.http.post<RetrieveResult>(url, {
       query_song_id: querySongId,
