@@ -37,14 +37,14 @@ export class RecommenderService {
     if (this.vgg19Recommendations()) {
       list.push(this.vgg19Recommendations());
     }
-    if (this.lamdaMARTRecommendations()) {
-      list.push(this.lamdaMARTRecommendations());
+    if (this.lamdaRankRecommendations()) {
+      list.push(this.lamdaRankRecommendations());
     }
     if (this.earlyFusionRecommendations()) {
-      list.push(this.lamdaMARTRecommendations());
+      list.push(this.lamdaRankRecommendations());
     }
     if (this.lateFusionRecommendations()) {
-      list.push(this.lamdaMARTRecommendations());
+      list.push(this.lamdaRankRecommendations());
     }
 
     return list
@@ -279,7 +279,7 @@ export class RecommenderService {
       refCount: true
     })
   )
-  lamdaMARTRecommendations: Signal<RetrieveResult | undefined> = toSignal(this.lamdaMARTRecommendations$)
+  lamdaRankRecommendations: Signal<RetrieveResult | undefined> = toSignal(this.lamdaMARTRecommendations$)
 
   getEarlyFusionRecommendations: Subject<RetrieveApiModel | void> = new Subject<RetrieveApiModel | void>();
   getEarlyFusionRecommendations$ = this.getEarlyFusionRecommendations.asObservable();

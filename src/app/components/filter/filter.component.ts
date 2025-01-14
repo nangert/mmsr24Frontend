@@ -41,7 +41,7 @@ export class FilterComponent implements OnInit{
     { name: 'MFCC Stats', key: 'MFCCSTAT' },
     { name: 'ResNet', key: 'ResNet' },
     { name: 'VGG19', key: 'VGG19' },
-    { name: 'LambdaMART', key: 'LambdaMART' },
+    { name: 'LambdaRank', key: 'LambdaRank' },
     { name: 'Early Fusion', key: 'EarlyFusion' },
     { name: 'Late Fusion', key: 'LateFusion' },
   ];
@@ -123,7 +123,7 @@ export class FilterComponent implements OnInit{
         case 'VGG19':
           this.recommenderService.getVGG19Recommendations.next(model)
           break
-        case 'LambdaMART':
+        case 'LambdaRank':
           this.recommenderService.getLamdaMARTRecommendations.next(model)
           break
         case 'EarlyFusion':

@@ -128,7 +128,7 @@ export class MetricsService {
       return this.apiService.getQueryMetrics(body)
     })
   )
-  lamdaMARTMetrics = toSignal(this.lamdaMARTMetrics$)
+  lamdaRankMetrics = toSignal(this.lamdaMARTMetrics$)
 
   earlyFusionMetrics$: Observable<QueryMetrics | undefined> = this.recommenderService.earlyFusionRecommendations$.pipe(
     tap(() => this.isLoadingQueryMetrics.set(true)),
