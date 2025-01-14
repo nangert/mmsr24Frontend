@@ -16,7 +16,10 @@ export class RecommenderApiService {
   }
 
   retrieveSongs(): Observable<Song[]> {
-    return this.http.get<Song[]>(`${this.baseUrl}/songs`);
+    return this.http.get<Song[]>(`${this.baseUrl}/songs`, {
+      headers: ({
+        "ngrok-skip-browser-warning": "69420"
+      })});
   }
 
   getBaselineRecommendations(querySongId: string, N: number, diversity: boolean): Observable<RetrieveResult> {
