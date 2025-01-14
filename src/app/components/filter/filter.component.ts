@@ -8,7 +8,6 @@ import {InputTextModule} from "primeng/inputtext";
 import {FilterModel} from "../../models/filter.model";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {RadioButtonModule} from "primeng/radiobutton";
-import {MetricsService} from "../../services/metrics.service";
 import {DataService} from "../../services/data.service";
 import {CheckboxModule} from "primeng/checkbox";
 import {SliderModule} from "primeng/slider";
@@ -38,16 +37,21 @@ export class FilterComponent implements OnInit{
     { name: 'Baseline', key: 'Baseline' },
     { name: 'Text based', key: 'TfIdf' },
     { name: 'BERT', key: 'Bert' },
-    { name: 'MFCC', key: 'MFCC' },
+    { name: 'MFCC BoW', key: 'MFCCBOW' },
+    { name: 'MFCC Stats', key: 'MFCCSTAT' },
     { name: 'ResNet', key: 'ResNet' },
     { name: 'VGG19', key: 'VGG19' },
-    { name: 'LambdaMART', key: 'LambdaMART' }
+    { name: 'LambdaMART', key: 'LambdaMART' },
+    { name: 'Early Fusion', key: 'EarlyFusion' },
+    { name: 'Late Fusion', key: 'LateFusion' },
   ];
 
   retrievalForm: FormGroup<RetrieveModel> = this.formBuilder.group({
     songId: '',
     count: 10,
     retrievalSystem: this.formBuilder.control([this.categories[0].key]),
+    diversity: false,
+    showMetrics: false
   }) as FormGroup<RetrieveModel>;
 
   filterForm: FormGroup<FilterModel> = this.formBuilder.group({
@@ -88,14 +92,13 @@ export class FilterComponent implements OnInit{
   retrieveSongs(): void {
     const model: RetrieveApiModel = {
       songId: this.retrievalForm.controls.songId.value,
-      count: this.retrievalForm.controls.count.value
+      count: this.retrievalForm.controls.count.value,
+      diversity: this.retrievalForm.controls.diversity.value
     }
 
     if (!model.songId || !model.count) return
 
-    if (model.songId !== this.recommenderService.querySong()?.song_id) {
-      this.recommenderService.resetRecommendations()
-    }
+    this.recommenderService.resetRecommendations()
 
     for (let retrievalSystem of this.retrievalForm.controls.retrievalSystem.value) {
       switch (retrievalSystem) {
@@ -108,8 +111,11 @@ export class FilterComponent implements OnInit{
         case 'Bert':
           this.recommenderService.getBertRecommendations.next(model)
           break
-        case 'MFCC':
-          this.recommenderService.getMFCCRecommendations.next(model)
+        case 'MFCCBOW':
+          this.recommenderService.getMFCCBowRecommendations.next(model)
+          break
+        case 'MFCCSTAT':
+          this.recommenderService.getMFCCBowRecommendations.next(model)
           break
         case 'ResNet':
           this.recommenderService.getResNetRecommendations.next(model)
@@ -120,11 +126,19 @@ export class FilterComponent implements OnInit{
         case 'LambdaMART':
           this.recommenderService.getLamdaMARTRecommendations.next(model)
           break
+        case 'EarlyFusion':
+          this.recommenderService.getEarlyFusionRecommendations.next(model)
+          break
+        case 'LateFusion':
+          this.recommenderService.getLateFusionRecommendations.next(model)
+          break
         default:
           this.recommenderService.getBaselineRecommendations.next(model)
       }
     }
+  }
 
-
+  displayMetrics(): void {
+    this.recommenderService.showMetrics.set(!this.recommenderService.showMetrics())
   }
 }
