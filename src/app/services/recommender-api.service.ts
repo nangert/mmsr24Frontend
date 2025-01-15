@@ -8,7 +8,7 @@ import {QueryMetrics} from "../models/retrieveModel";
   providedIn: 'root'
 })
 export class RecommenderApiService {
-  private baseUrl = 'https://5fb6-62-68-222-39.ngrok-free.app';
+  private baseUrl = 'https://c90e-62-68-222-39.ngrok-free.app';
   private http = inject(HttpClient)
 
   checkHealth(): Observable<any> {
